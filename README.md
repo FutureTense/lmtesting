@@ -1,30 +1,5 @@
 # lock-manager
 
-1.  Z-wave lock
-    
-    Use the dropdown and select your Z-Wave lock.  The default for Schlage looks like `lock.be469zp_connect_smart_deadbolt_locked`
-2.  Code slots
-
-    The number of code slots or PINS you want to manage.  The maxinum number is depedant upon your lock.  Don't create more slots than you will actually need, because too many can slow your lovelace UI down.
-3.  Start from code slot #
-
-    explanation here
-4.  Lock Name
-    Give your lock a name that will be used in notifications, e.g. *FrontDoor*
-5.  Door Sensor
-
-    If your lock has a sensor that determines if the door is opened/closed, select it here.  The Schlage doesn't have one but you can use a third party sensor or specify any sensor here.
-6.  User Code Sensor
-
-    This sensor returns the slot number for a user that just entered their lock PIN.  Schlage value: `sensor.be469zp_connect_smart_deadbolt_user_code`
-7.  Access Control Sensor
-
-    This sensor returns the command number just executed by the lock.  Schlage value: `sensor.be469zp_connect_smart_deadbolt_access_control`    
-8.  Path to packages directory
-
-    The path to where the integration will generate the Home Assistant code for each lock.
-
-
 Home Assistant Lock Manager integration for Z-Wave enabled locks. This integration allows you to control one (or more) Z-Wave enabled locks that have been added to your Z-Wave network.  Besides being able to control your lock with lock/unlock commands, you can also control who may lock/unlock the device using the lock's front facing keypad.  With the integration you may create multiple users or slots and each slot (the number depends upon the lock model) has its own PIN code.
 
 Setting up a lock for the entire family can be accomplished in a matter of seconds.  Did you just leave town and forgot to turn the stove off?  through the Home Assistant interface you can create a new PIN instantly and give it to a neighbor and delete it later.  Do you have house cleaners that come at specifc times?  With the advanced PIN settings you can create a slot that only unlocks on specific date and time ranges. You may also create slots that allow a number of entries, after which the lock won't respond to the PIN.
@@ -66,35 +41,37 @@ Follow [these instructions](https://hacs.xyz/docs/faq/custom_repositories) to ad
 
 Open HACS and select the Integrations tab.  Click the + icon at the bottom right and search for `lock-manager`.  If you are using the OpenZwave implemtation, make sure you choose the latest version that ends in **ozw**.  Otherwise, for the native HA Zwave implementation select a version *without* ozw.  You will then get a message that the integration requires Home Assistant to be restarted.  Please do so.
 
-You need to create an integration for each lock you want to control.  Select Configuration | Integrations.  Click the + icon at the bottom right and search for **Lock Manager** and select it.  The integration UI will prompt you for several values:
+You need to create an integration for each lock you want to control.  Select Configuration | Integrations.  Click the + icon at the bottom right and search for **Lock Manager** and select it.  The integration UI will prompt you for several values.  Below we are using the default entity names that are created for a Schlage BE469 lock.
 
-1. Z-wave lock
-> Use the dropdown and select your Z-Wave lock.  The default for Schlage looks like `lock.be469zp_connect_smart_deadbolt_locked`
-      
-      
-2. aaa
+1.  Z-wave lock
+    
+    Use the dropdown and select your Z-Wave lock.  The default for Schlage looks like `lock.be469zp_connect_smart_deadbolt_locked`
+2.  Code slots
 
-If all goes well, you will also see a new directory (by default `<your config directory/packages/lockmanager/>`) for each lock with `yaml` and a lovelace files. So if you add two integrations, one with FrontDoor and the other with BackDoor, you should see two directories with those names. Inside of each of those directories will be a file called `<lockname>_lovelace`. Open that file in a text editor and select the entire contents and copy to the clipboard.
+    The number of code slots or PINS you want to manage.  The maxinum number is depedant upon your lock.  Don't create more slots than you will actually need, because too many can slow your lovelace UI down.
+3.  Start from code slot #
+
+    explanation here
+4.  Lock Name
+    Give your lock a name that will be used in notifications, e.g. *FrontDoor*
+5.  Door Sensor
+
+    If your lock has a sensor that determines if the door is opened/closed, select it here.  The Schlage doesn't have one but you can use a third party sensor or specify any sensor here.
+6.  User Code Sensor
+
+    This sensor returns the slot number for a user that just entered their lock PIN.  Schlage value: `sensor.be469zp_connect_smart_deadbolt_user_code`
+7.  Access Control Sensor
+
+    This sensor returns the command number just executed by the lock.  Schlage value: `sensor.be469zp_connect_smart_deadbolt_access_control`    
+8.  Path to packages directory
+
+    The default `/config/packages/lock-manager` should suffice.
+
+If all goes well, you will also see a new directory (by default `<your config directory/packages/lock-manager/>`) for each lock with `yaml` and a lovelace files. So if you add two integrations, one with FrontDoor and the other with BackDoor, you should see two directories with those names. Inside of each of those directories will be a file called `<lockname>_lovelace`. Open that file in a text editor and select the entire contents and copy to the clipboard.
 
 > (Open file) Ctrl-A (select all) Ctrl-C (copy)
 
 Open Home Assistant and open the LoveLace editor by clicking the elipses on the top right of the screen, and then select "Configure UI". Click the elipses again and click "Raw config editor". Scroll down to the bottom of the screen and then paste your clipboard. This will paste a new View for your lock. Click the Save button then click the X to exit.
-
-You will also need to register the following plug-ins by pasting the following into the lovelace "resoures" section at the top of your lovelcace file.
-
-    resources:
-        - url: /community_plugin/lovelace-card-mod/card-mod.js
-          type: module
-        - url: /community_plugin/lovelace-fold-entity-row/fold-entity-row.js
-          type: module
-        - url: /community_plugin/lovelace-card-tools/card-tools.js
-          type: js
-
-The easiest way to add these plugins is using the [Home Assistant Community Store](https://community.home-assistant.io/t/custom-component-hacs/121727). You will need to go to "Settings" and add the following repositories in order to download the plugins:
-
-- https://github.com/thomasloven/lovelace-auto-entities
-- https://github.com/thomasloven/lovelace-card-tools
-
 #### Additional Setup
 
 Before your lock will respond to automations, you will need to add a couple of things to your existing configuration. The first is you need to add the following `input_booleans`:
@@ -110,7 +87,7 @@ system_ready:
 
 ```
 
-and you will also need to add this `binary_sensor`
+and you will also need to create these `binary_sensor`
 
 ```
     allow_automation:
@@ -123,7 +100,7 @@ and you will also need to add this `binary_sensor`
       device_class: moving
 ```
 
-`binary_sensor.allow_automation` is used _extensivly_ throught the project. If you examine the code, you see it will refered to the `input_boolean.allow_automation_execution`. The reasons for a seperate input_boolean and binary_sensor are beyond the scope of this document. But the reason they exist is worth a discussion.
+`binary_sensor.allow_automation` is used _extensivly_ throught the project. If you examine the code, you see it will refered to the `input_boolean.allow_automation_execution`. The reasons for a seperate input_boolean and binary_sensor are beyond the scope of this document.
 
 When Home Assistant starts up, several of this project's automations will be called, which if you have notificatins on will send unnecessary notifications. The allow_automations boolean will prevent those automations from firing. However, in order for this to work you stil need to add a few more things.
 
@@ -136,41 +113,52 @@ Add the following to you Home Asssistant Automations (not in this project!)
     platform: homeassistant
     event: start
   action:
-    - service: script.turn_on
-      entity_id: script.customstartup
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.system_ready
+    - service: input_boolean.turn_off
+      entity_id: 'input_boolean.allow_automation_execution'
 
-- alias: Zwave_loaded_Start_System
+- alias: open_zwave_network_down
   initial_state: true
   trigger:
-    - platform: event
-      event_type: zwave.network_ready
-    - platform: event
-      event_type: zwave.network_complete
-    - platform: event
-      event_type: zwave.network_complete_some_dead
+    - platform: state
+      entity_id: binary_sensor.ozw_network_status
+      to: "off"
   action:
-    - service: script.turn_on
-      entity_id: script.system_cleanup
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.allow_automation_execution
+
+- alias: open_zwave_network_up
+  initial_state: true
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id: binary_sensor.ozw_network_status
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.ozw_network_status
+      state: "on"
+  action:
+    - service: script.system_startup_cleanup
 ```
 
 and likewise, add the following to your scripts:
 
 ```
-system_cleanup:
+# feel free to add post startup calls here
+system_startup_cleanup:
   sequence:
-    #- service: homekit.start If you use homekit, uncomment this statement
+    - condition: state
+      entity_id: 'input_boolean.system_ready'
+      state: 'off' 
+    - service: homekit.start
+    - service: input_boolean.turn_on
+      entity_id: 'input_boolean.allow_automation_execution'
     - service: input_boolean.turn_on
       entity_id: input_boolean.system_ready
-    - service: input_boolean.turn_on
-      data:
-        entity_id: 'input_boolean.allow_automation_execution'
-
-customstartup:
-  sequence:
-    - service: input_boolean.turn_off
-      data:
-        entity_id: 'input_boolean.allow_automation_execution'
-      # You can add other "startup" code here if you wish
+        
 ```
 
 This ensures that your input_boolean.allow_automation_exectuion is turned off at startup. After your Zwave devices have been loaded, script.system_cleanup is called, which will enable this boolean and allow your automations to execute. As it takes some time for your Zwave devices to actually load, use binary_sensor.system_ready sensor on the GUI so the end user knows when everything is ready to go.

@@ -2,7 +2,7 @@
 
 Home Assistant Lock Manager integration for Z-Wave enabled locks. This integration allows you to control one (or more) Z-Wave enabled locks that have been added to your Z-Wave network.  Besides being able to control your lock with lock/unlock commands, you can also control who may lock/unlock the device using the lock's front facing keypad.  With the integration you may create multiple users or slots and each slot (the number depends upon the lock model) has its own PIN code.
 
-Setting up a lock for the entire family can be accomplished in a matter of seconds.
+Setting up a lock for the entire family can be accomplished in a matter of seconds.  Did you just leave town and forgot to turn the stove off?  through the Home Assistant interface you can create a new PIN instantly and give it to a neighbor and delete it later.  Do you have house cleaners that come at specifc times?  With the advanced PIN settings you can create a slot that only unlocks on specific date and time ranges. You may also create slots that allow a number of entries, after which the lock won't respond to the PIN.
 
 For more information, please see the topic for this package at the [Home Assistant Community Forum](https://community.home-assistant.io/t/simplified-zwave-lock-manager/126765).
 
@@ -38,6 +38,8 @@ would become
 This integration can be installed manually, but the *supported* method requires you to use The [Home Assistant Community Store](https://community.home-assistant.io/t/custom-component-hacs/121727).  If you dont't already have HACS, it is [simple to install](https://hacs.xyz/docs/installation/prerequisites).
 
 Follow [these instructions](https://hacs.xyz/docs/faq/custom_repositories) to add a custom repository to your HACS integration.  The repository you want to use is: https://github.com/FutureTense/lock-manager and you will want to install it as an `Integration`.
+
+Open HACS and select the Integrations tab.  Click the + icon at the bottom right and search for `lock-manager`.  If you are using the OpenZwave implemtation, make sure you choose the latest version that ends in **ozw**.  Otherwise, for the native HA Zwave implementation select a version *without* ozw.  You will then get a message that the integration requires Home Assistant to be restarted.  Please do so.
 
 
 If all goes well, you will also see a new directory (by default `<your config directory/packages/lockmanager/>`) for each lock with `yaml` and a lovelace files. So if you add two integrations, one with FrontDoor and the other with BackDoor, you should see two directories with those names. Inside of each of those directories will be a file called `<lockname>_lovelace`. Open that file in a text editor and select the entire contents and copy to the clipboard.

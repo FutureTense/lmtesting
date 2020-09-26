@@ -8,7 +8,19 @@ For more information, please see the topic for this package at the [Home Assista
 
 This package works with several Z-Wave Door locks, but only has been tested by the developers for Kwikset and Schlage.  It also supports an optional door sensor, and accepts a `cover` for a garage. If you aren't using the open/closed door sensor or garage cover, you can just hide or ignore the assoicated entities in the generated lovelace files. Likewise you can remove the garage cover. In fact, if wish to modify the lovelace used for all locks, you can edit the `lovelace.head` and `lovelace.code` files in the /config/packages/DOOR directory which are used to build the lovelace code for your lock.
 
-**N.B.** After you add your devices (Zwave lock, door sensor) to your Z-Wvave network via the inlusion mode, you should consider using the Home Assistant Entity Registry and rename each entity that belongs to the lock device and append `_LOCKNAME` to it. For example, if you are calling your lock `FrontDoor`, you will want to append \_FrontDoor to each entity of the lock device.  This isn't necessary, but it will make it easier to understand which entities belong to which locks.  This is especially true if you are using multiple locks.
+# If you're using multiple locks, please read this!
+<details>
+  <summary>If you're using multiple locks, please click here!</summary>
+  
+After you add your devices (Zwave lock, door sensor) to your Z-Wvave network via the inlusion mode, you should consider using the Home Assistant Entity Registry and rename each entity that belongs to the lock device and append `_LOCKNAME` to it. For example, if you are calling your lock `FrontDoor`, you will want to append \_FrontDoor to each entity of the lock device.  This isn't necessary, but it will make it easier to understand which entities belong to which locks.  This is especially true if you are using multiple locks.
+
+  
+  ## Heading
+  1. A numbered
+  2. list
+     * With some
+     * Sub bullets
+</details>
 
 `sensor.schlage_allegion_be469_touchscreen_deadbolt_alarm_level`
 would become

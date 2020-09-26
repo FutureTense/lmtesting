@@ -7,11 +7,22 @@
 
     The number of code slots or PINS you want to manage.  The maxinum number is depedant upon your lock.  Don't create more slots than you will actually need, because too many can slow your lovelace UI down.
 3.  Start from code slot #
+
+    explanation here
 4.  Lock Name
+    Give your lock a name that will be used in notifications, e.g. *FrontDoor*
 5.  Door Sensor
+
+    If your lock has a sensor that determines if the door is opened/closed, select it here.  The Schlage doesn't have one but you can use a third party sensor or specify any sensor here.
 6.  User Code Sensor
+
+    This sensor returns the slot number for a user that just entered their lock PIN.  Schlage value: `sensor.be469zp_connect_smart_deadbolt_user_code`
 7.  Access Control Sensor
+
+    This sensor returns the command number just executed by the lock.  Schlage value: `sensor.be469zp_connect_smart_deadbolt_access_control`    
 8.  Path to packages directory
+
+    The path to where the integration will generate the Home Assistant code for each lock.
 
 
 Home Assistant Lock Manager integration for Z-Wave enabled locks. This integration allows you to control one (or more) Z-Wave enabled locks that have been added to your Z-Wave network.  Besides being able to control your lock with lock/unlock commands, you can also control who may lock/unlock the device using the lock's front facing keypad.  With the integration you may create multiple users or slots and each slot (the number depends upon the lock model) has its own PIN code.

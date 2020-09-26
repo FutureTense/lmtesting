@@ -1,6 +1,6 @@
 # lock-manager
 
-Home Assistant Zwave Lock Manager package
+Home Assistant Lock Manager integration for Z-Wave enabled locks. This integration allows you to control one (or more) Z-Wave enabled locks that have been added to your Z-Wave network.  Besides being able to control your lock with lock/unlock commands, you can also control who may lock/unlock the device using the lock's front facing keypad.  With the integration you may create multiple PIN codes.  Each lock model has a different limit, eg the Schlage allows for 30.  
 
 For more information, please see the topic for this package at the [Home Assistant Community Forum](https://community.home-assistant.io/t/simplified-zwave-lock-manager/126765).
 

@@ -35,8 +35,7 @@ would become
 
 This integration can be installed manually, but the *supported* method requires you to use The [Home Assistant Community Store](https://community.home-assistant.io/t/custom-component-hacs/121727).  If you dont't already have HACS, it is [simple to install](https://hacs.xyz/docs/installation/prerequisites).
 
-You will need to go to "Settings" and add the following repositories in order to download the plugins:.
-
+Follow [these instructions](https://hacs.xyz/docs/faq/custom_repositories) to add a custom repository to your HACS integration.  The repository you want to use is: https://github.com/FutureTense/lock-manager and you will want to install it as an `Integration`.
 
 
 If all goes well, you will also see a new directory (by default `<your config directory/packages/lockmanager/>`) for each lock with `yaml` and a lovelace files. So if you add two integrations, one with FrontDoor and the other with BackDoor, you should see two directories with those names. Inside of each of those directories will be a file called `<lockname>_lovelace`. Open that file in a text editor and select the entire contents and copy to the clipboard.

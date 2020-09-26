@@ -4,11 +4,11 @@ Home Assistant Zwave Lock Manager package
 
 For more information, please see the topic for this package at the [Home Assistant Community Forum](https://community.home-assistant.io/t/simplified-zwave-lock-manager/126765).
 
-## Installation
+## Before installing
 
-This package uses any Z-Wave Door lock and an (optional) door sensor, and accepts a `cover` for a garage. If you aren't using the open/closed door sensor, you can just hide the assoicated entities in the generated lovelace file. Likewise you can remove the garage cover. In fact, if wish to modify the lovelace used for all locks, you can edit the `lovelace.head` and `lovelace.code` files which are used to generate a lovelace view for your lock.
+This package works with several Z-Wave Door locks, but only has been tested by the developers for Kwikset and Schlage.  It also supports an optional door sensor, and accepts a `cover` for a garage. If you aren't using the open/closed door sensor or garage cover, you can just hide or ignore the assoicated entities in the generated lovelace files. Likewise you can remove the garage cover. In fact, if wish to modify the lovelace used for all locks, you can edit the `lovelace.head` and `lovelace.code` files in the /config/packages/DOOR directory which are used to build the lovelace code for your lock.
 
-**N.B.** After you add your devices (Zwave lock, door sensor) to your Z-Wvave network via the inlusion mode, use the Home Assistant Entity Registry and rename each entity that belongs to the device and append `_LOCKNAME` to it. For example, if you are calling your lock `FrontDoor`, you will want to append \_FrontDoor to each entity of the device.
+**N.B.** After you add your devices (Zwave lock, door sensor) to your Z-Wvave network via the inlusion mode, you should consider using the Home Assistant Entity Registry and rename each entity that belongs to the lock device and append `_LOCKNAME` to it. For example, if you are calling your lock `FrontDoor`, you will want to append \_FrontDoor to each entity of the lock device.  This isn't necessary, but it will make it easier to understand which entities belong to which locks.  This is especially true if you are using multiple locks.
 
 `sensor.schlage_allegion_be469_touchscreen_deadbolt_alarm_level`
 would become
@@ -20,9 +20,12 @@ AND
 would become
 `lock.schlage_allegion_be469_touchscreen_deadbolt_frontdoor`
 
-While you are appending each entity, examine the entities of your new devices carefully. You need to identify the "lowest common demominator" of the device. This would be the text that is part of _every_ entity that exists in the entity registry. You need to do this for the lock, and door sensor if you have one.
 
-Make sure you rename _every_ associated entity in the entity registry. The easiest way to do this is take the base name you found, and put it in the search bar of the entity registry. This will show all of the entities you need to rename. Just go down the list and append `_FrontDoor` (assuming that's the name you chose) at the end of each entity.
+Speaking of multiple locks, each physical lock requires its own integration.  When you create an integration, you give the lock a name, (such as *frontdoor*) and a directory will be created in /config/packages/ that holds the code for that lock.  So if you have a second physical lock, you will create a second integration (such as *backdoor*) and then you will have the following directories:
+
+    /config/packages/frontdoor
+    /config/packages/backdoor
+
 
 If you have multiple locks, add the integration again and use a different `LockName`. Make sure you append this door's name (eg \_BackDoor) to this lock's entities using the entity register.
 

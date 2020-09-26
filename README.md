@@ -1,5 +1,19 @@
 # lock-manager
 
+1.  Z-wave lock
+    
+    Use the dropdown and select your Z-Wave lock.  The default for Schlage looks like `lock.be469zp_connect_smart_deadbolt_locked`
+2.  Code slots
+
+    The number of code slots or PINS you want to manage.  The maxinum number is depedant upon your lock.  Don't create more slots than you will actually need, because too many can slow your lovelace UI down.
+3.  Start from code slot #
+4.  Lock Name
+5.  Door Sensor
+6.  User Code Sensor
+7.  Access Control Sensor
+8.  Path to packages directory
+
+
 Home Assistant Lock Manager integration for Z-Wave enabled locks. This integration allows you to control one (or more) Z-Wave enabled locks that have been added to your Z-Wave network.  Besides being able to control your lock with lock/unlock commands, you can also control who may lock/unlock the device using the lock's front facing keypad.  With the integration you may create multiple users or slots and each slot (the number depends upon the lock model) has its own PIN code.
 
 Setting up a lock for the entire family can be accomplished in a matter of seconds.  Did you just leave town and forgot to turn the stove off?  through the Home Assistant interface you can create a new PIN instantly and give it to a neighbor and delete it later.  Do you have house cleaners that come at specifc times?  With the advanced PIN settings you can create a slot that only unlocks on specific date and time ranges. You may also create slots that allow a number of entries, after which the lock won't respond to the PIN.
@@ -44,7 +58,9 @@ Open HACS and select the Integrations tab.  Click the + icon at the bottom right
 You need to create an integration for each lock you want to control.  Select Configuration | Integrations.  Click the + icon at the bottom right and search for **Lock Manager** and select it.  The integration UI will prompt you for several values:
 
 1. Z-wave lock
-    use the 
+> Use the dropdown and select your Z-Wave lock.  The default for Schlage looks like `lock.be469zp_connect_smart_deadbolt_locked`
+      
+      
 2. aaa
 
 If all goes well, you will also see a new directory (by default `<your config directory/packages/lockmanager/>`) for each lock with `yaml` and a lovelace files. So if you add two integrations, one with FrontDoor and the other with BackDoor, you should see two directories with those names. Inside of each of those directories will be a file called `<lockname>_lovelace`. Open that file in a text editor and select the entire contents and copy to the clipboard.

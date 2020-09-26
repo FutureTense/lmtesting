@@ -8,6 +8,13 @@ For more information, please see the topic for this package at the [Home Assista
 
 This package works with several Z-Wave Door locks, but only has been tested by the developers for Kwikset and Schlage.  It also supports an optional door sensor, and accepts a `cover` for a garage. If you aren't using the open/closed door sensor or garage cover, you can just hide or ignore the assoicated entities in the generated lovelace files. Likewise you can remove the garage cover. In fact, if wish to modify the lovelace used for all locks, you can edit the `lovelace.head` and `lovelace.code` files in the /config/packages/DOOR directory which are used to build the lovelace code for your lock.
 
+### Each lock requires its own integration
+Each physical lock requires its own integration.  When you create an integration, you give the lock a name, (such as *frontdoor*) and a directory will be created in /config/packages/ that holds the code for that lock.  So if you have a second physical lock, you will create a second integration (such as *backdoor*).  When you are finished, you will have the following directories:
+
+    /config/packages/frontdoor
+    /config/packages/backdoor
+
+
 <details>
   <summary>If you're using multiple locks, please click here!</summary>
   
@@ -22,13 +29,6 @@ AND
 `lock.schlage_allegion_be469_touchscreen_deadbolt_locked`
 would become
 `lock.schlage_allegion_be469_touchscreen_deadbolt_frontdoor`
-
-
-Speaking of multiple locks, each physical lock requires its own integration.  When you create an integration, you give the lock a name, (such as *frontdoor*) and a directory will be created in /config/packages/ that holds the code for that lock.  So if you have a second physical lock, you will create a second integration (such as *backdoor*) and then you will have the following directories:
-
-    /config/packages/frontdoor
-    /config/packages/backdoor
-
 </details>
 
 

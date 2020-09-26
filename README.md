@@ -43,7 +43,8 @@ Open HACS and select the Integrations tab.  Click the + icon at the bottom right
 
 You need to create an integration for each lock you want to control.  Select Configuration | Integrations.  Click the + icon at the bottom right and search for **Lock Manager** and select it.  The integration UI will prompt you for several values:
 
-1. aaa
+1. Z-wave lock
+    use the 
 2. aaa
 
 If all goes well, you will also see a new directory (by default `<your config directory/packages/lockmanager/>`) for each lock with `yaml` and a lovelace files. So if you add two integrations, one with FrontDoor and the other with BackDoor, you should see two directories with those names. Inside of each of those directories will be a file called `<lockname>_lovelace`. Open that file in a text editor and select the entire contents and copy to the clipboard.
